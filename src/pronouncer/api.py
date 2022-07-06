@@ -7,7 +7,7 @@ from starlette.templating import Jinja2Templates
 from .constants import VOICES
 from .tasks import say_text
 
-app = FastAPI()
+app = FastAPI(docs_url="/api/docs")
 templates = Jinja2Templates(directory="src/templates")
 
 

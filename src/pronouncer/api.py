@@ -64,12 +64,12 @@ def get_voices() -> dict[str, list[str]]:
     return VOICES
 
 
-@app.get("/")
+@app.get("/", include_in_schema=False)
 def index(request: Request) -> templates.TemplateResponse:
     return templates.TemplateResponse("index.html", {'request': request})
 
 
-@app.post("/")
+@app.post("/", include_in_schema=False)
 def index(
     request: Request,
     background_tasks: BackgroundTasks,

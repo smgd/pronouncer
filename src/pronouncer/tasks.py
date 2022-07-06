@@ -23,3 +23,9 @@ def say_text(text: str, voice: Optional[str] = None, lang: Optional[str] = None)
               f'&& mpv speech.wav'
 
     os.system(command)
+
+
+def play_mario() -> None:
+    command = 'mpv assets/mario.wav'
+
+    os.system(command)

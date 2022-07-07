@@ -41,3 +41,9 @@ def play_mario() -> None:
     command = 'mpv assets/mario.wav'
 
     os.system(command)
+
+
+def play_mayak() -> None:
+    command = 'mpv assets/mayak.wav'
+
+    os.system(command)

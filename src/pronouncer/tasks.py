@@ -1,3 +1,4 @@
+import datetime
 import os
 import random
 from typing import Optional
@@ -15,12 +16,23 @@ def choose_voice(voice: Optional[str] = None, lang: Optional[str] = None) -> str
     return voice
 
 
-def say_text(text: str, voice: Optional[str] = None, lang: Optional[str] = None) -> None:
+def get_say_command(text: str, voice: Optional[str] = None, lang: Optional[str] = None) -> str:
     voice = choose_voice(voice, lang)
 
-    command = f'echo "{text}" | RHVoice-test --profile "{voice}" ' \
-              f'-v 100 --pitch 100 --rate 90 --sample-rate 360 -o speech.wav ' \
-              f'&& mpv speech.wav'
+    return f'echo "{text}" | RHVoice-test --profile "{voice}" ' \
+           f'-v 100 --pitch 100 --rate 90 --sample-rate 360 -o speech.wav'
+
+
+def say_text(text: str, voice: Optional[str] = None, lang: Optional[str] = None) -> None:
+    say_command = get_say_command(text, voice, lang)
+    command = f'{say_command} && mpv speech.wav'
+
+    os.system(command)
+
+
+def say_time() -> None:
+    text = f'Точное время по Тбилиси - {datetime.datetime.now().strftime("%H:%M")}'
+    command = f'{get_say_command(text)} && mpv assets/fanfare.wav && mpv speech.wav'
 
     os.system(command)
 

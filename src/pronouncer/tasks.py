@@ -47,3 +47,9 @@ def play_mayak() -> None:
     command = 'mpv assets/mayak.wav'
 
     os.system(command)
+
+
+def play_metro(sample_name: str) -> None:
+    command = f'mpv assets/metro/{sample_name}.wav'
+
+    os.system(command)

@@ -5,7 +5,7 @@ from pydantic import BaseModel, validator, root_validator
 from starlette.templating import Jinja2Templates
 
 from .constants import VOICES
-from .tasks import say_text, play_mario, say_time, play_mayak
+from .tasks import say_text, play_mario, say_time, play_mayak, play_metro
 
 app = FastAPI(docs_url="/api/docs")
 templates = Jinja2Templates(directory="src/templates")
@@ -74,6 +74,16 @@ def mayak(background_tasks: BackgroundTasks) -> dict[str, str]:
 @app.post("/api/time/")
 def time(background_tasks: BackgroundTasks) -> dict[str, str]:
     background_tasks.add_task(say_time)
+    return {"result": "OK"}
+
+
+class MetroRequest(BaseModel):
+    sample_name: str
+
+
+@app.post("/api/metro/")
+def metro(background_tasks: BackgroundTasks, request: MetroRequest) -> dict[str, str]:
+    background_tasks.add_task(play_metro, sample_name=request.sample_name)
     return {"result": "OK"}
 
 

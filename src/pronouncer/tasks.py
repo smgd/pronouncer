@@ -32,7 +32,7 @@ def say_text(text: str, voice: Optional[str] = None, lang: Optional[str] = None)
 
 def say_time() -> None:
     text = f'Точное время по Тбилиси - {datetime.datetime.now().strftime("%H:%M")}'
-    command = f'{get_say_command(text)} && mpv assets/fanfare.wav && mpv speech.wav'
+    command = f'{get_say_command(text)} && mpv assets/pipipi.wav && mpv speech.wav'
 
     os.system(command)
 
